@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <block type="core/template" name="skroutz_head_script" template="digitalup/skroutz/script.phtml"/>
+        </reference>
+    </default>
+    <checkout_onepage_success>
+        <reference name="root">
+            <reference name="after_body_start">
+                <block type="skroutz/success" name="skroutz_success_page" template="digitalup/skroutz/success.phtml"/>
+            </reference>
+        </reference>
+    </checkout_onepage_success>
+</layout>

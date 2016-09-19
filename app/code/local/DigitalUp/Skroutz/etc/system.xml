@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<config>
+	  <tabs>
+		<digitalup translate="label" module="skroutz">
+            <label>DigitalUp</label>
+            <sort_order>2</sort_order>
+        </digitalup>
+	  </tabs>
+	  <sections>
+		<skroutz  translate="label" module="skroutz">                    
+		<label>Skroutz</label>
+		<tab>digitalup</tab>
+		<frontend_type>text</frontend_type>
+		<sort_order>2</sort_order>
+		<show_in_default>1</show_in_default>
+		<show_in_website>1</show_in_website>
+		<show_in_store>1</show_in_store>            
+					<groups>
+				      <analytics translate="label"> 
+					  <label>Skroutz Analytics</label>
+					  <frontend_type>text</frontend_type>
+					  <sort_order>2</sort_order>
+					  <show_in_default>1</show_in_default>
+					  <show_in_website>1</show_in_website>
+					  <show_in_store>1</show_in_store>
+				       <fields>
+                          <enabled translate="label">
+                            <label>Enable Skroutz Analytics</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                          </enabled>
+                          <account_id translate="label">
+                            <label>Shop Account ID</label>
+							<frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                          </account_id>
+					   </fields>
+					   </analytics>
+				      <feed translate="label"> 
+					  <label>Skroutz XML Feed</label>
+					  <frontend_type>text</frontend_type>
+					  <sort_order>1</sort_order>
+					  <show_in_default>1</show_in_default>
+					  <show_in_website>1</show_in_website>
+					  <show_in_store>1</show_in_store>
+				       <fields>
+                          <enabled translate="label">
+                            <label>Enable Feed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Enable XML Feed</comment>
+                          </enabled>
+					   </fields>
+					   </feed>
+					</groups>
+		</skroutz>
+	  </sections>
+</config>
