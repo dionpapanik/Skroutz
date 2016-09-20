@@ -6,6 +6,7 @@ class DigitalUp_Skroutz_Helper_Data extends Mage_Core_Helper_Abstract
     const FEED_ENABLED = 'skroutz/feed/enabled';
     const ANALYTICS_ENABLED = 'skroutz/analytics/enabled';
     const ANALYTICS_ID = 'skroutz/analytics/account_id';
+    const DEBUG = 'skroutz/analytics/debug';
 
 
     protected $_feedEnabled = null;
@@ -50,6 +51,16 @@ class DigitalUp_Skroutz_Helper_Data extends Mage_Core_Helper_Abstract
             $this->_analyticsId = (string)Mage::getStoreConfig(self::ANALYTICS_ID);
         }
         return $this->_analyticsId;
+    }
+
+    public function debugData($data)
+    {
+        if ((bool)Mage::getStoreConfig(self::DEBUG)) {
+        	Mage::log($data, null, 'skroutz.log', true);
+            if (Mage::helper('core')->isDevAllowed()) {                
+                Zend_Debug::dump($data);
+            }
+        }
     }
 }
 	 

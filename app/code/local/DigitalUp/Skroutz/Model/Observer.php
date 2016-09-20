@@ -12,7 +12,7 @@ class DigitalUp_Skroutz_Model_Observer
         if ($block) {
             $block->setOrderIds($orderIds);
         }
-        // Mage::log($orderIds, null, 'dionisis.log', true); // done!
+        Mage::helper('skroutz')->debugData('observer id: '.$orderIds);
     }
 
 }
