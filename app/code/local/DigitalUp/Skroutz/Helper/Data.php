@@ -6,7 +6,7 @@ class DigitalUp_Skroutz_Helper_Data extends Mage_Core_Helper_Abstract
     const FEED_ENABLED = 'skroutz/feed/enabled';
     const ANALYTICS_ENABLED = 'skroutz/analytics/enabled';
     const ANALYTICS_ID = 'skroutz/analytics/account_id';
-    const DEBUG = 'skroutz/analytics/debug';
+    const DEBUG = 'skroutz/developer/debug';
 
 
     protected $_feedEnabled = null;
