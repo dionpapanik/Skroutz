@@ -59,8 +59,18 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <comment>Enable XML Feed</comment>
+                            <comment>Enable XML Feed -> http://storename.gr/skroutz/feed</comment>
                         </enabled>
+                        <xml_data translate="label">
+                            <label>XML Feed Data</label>
+                            <frontend_model>skroutz/adminhtml_system_config_xmlData</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>doesn't work for now</comment>
+                        </xml_data>
                     </fields>
                 </feed>
                 <developer translate="label">

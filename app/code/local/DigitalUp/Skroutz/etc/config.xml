@@ -42,5 +42,14 @@
                 </observers>
             </checkout_onepage_controller_success_action>
         </events>
+        <routers>
+            <skroutzcontroller>
+                <use>standard</use>
+                <args>
+                    <module>DigitalUp_Skroutz</module>
+                    <frontName>skroutz</frontName>
+                </args>
+            </skroutzcontroller>
+        </routers>
     </frontend>
 </config>
