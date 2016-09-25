@@ -8,7 +8,7 @@ class DigitalUp_Skroutz_Block_Success extends Mage_Core_Block_Template
         if (empty($orderIds) || !is_array($orderIds)) {
             return;
         }
-        Mage::helper('skroutz')->debugData('success: '.$orderIds); //done
+        Mage::helper('skroutz')->debugData('success: ' . $orderIds); //done
 
         // load order
         $collection = Mage::getResourceModel('sales/order_collection')
