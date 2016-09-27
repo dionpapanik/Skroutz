@@ -31,16 +31,14 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
     public function getTheCrumb($product)
     {
         unset($crumb);
-        $crumb = array();
-        foreach ($product->getCategoryIds() as $category_id) {
-            $category = Mage::getModel('catalog/category')->load($category_id); //load the first category of the product
-            $pathInStore = $category->getPathInStore(); // get the path ids - type string
-            $pathIds = array_reverse(explode(',', $pathInStore)); // reverse it. convert to array
-            $CatModel = Mage::getModel('catalog/category');
-            foreach ($pathIds as $id) { //iterate ids and get name
-                $CatModel->load($id);
-                $crumb[] = $CatModel->getData("name");
-            }
+        $crumb = array();       
+        $category = Mage::getModel('catalog/category')->load($product->getCategoryIds()[0]); //load the first category of the prodduct
+        $pathInStore = $category->getPathInStore(); // get the path ids - type string
+        $pathIds = array_reverse(explode(',', $pathInStore)); // reverse it. convert to array
+        $cat = Mage::getModel('catalog/category');
+        foreach ($pathIds as $id) { //iterate ids and get name
+            $cat->load($id);
+            $crumb[] = $cat->getData("name");
         }
         return htmlspecialchars(implode(' > ', $crumb));
     }
