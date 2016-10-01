@@ -100,7 +100,6 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
                 break;
             case 'manufacturer':
                 return $product->getAttributeText('manufacturer');
-                $product->isSaleable();
                 break;
             case 'availability':
                 return $this->_getAvailability($product);
