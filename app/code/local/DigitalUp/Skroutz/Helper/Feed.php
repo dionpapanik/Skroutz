@@ -85,7 +85,7 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
                 return $product->getName();
                 break;
             case 'price_with_vat':
-                Mage::app()->loadAreaPart(Mage_Core_Model_App_Area::AREA_FRONTEND, Mage_Core_Model_App_Area::PART_EVENTS);
+                Mage::app()->loadAreaPart(Mage_Core_Model_App_Area::AREA_FRONTEND, Mage_Core_Model_App_Area::PART_EVENTS); // use frontend events to get the FinalPrice after rules.
                 $price = Mage::helper('tax')->getPrice($product, $product->getFinalPrice());
                 return $price;
                 break;
