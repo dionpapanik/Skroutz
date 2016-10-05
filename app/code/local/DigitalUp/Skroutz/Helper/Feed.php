@@ -7,20 +7,27 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
 {
     /**
      * get collection of items for xml feed
-     * filter only simple, enabled and catalog/searchable products
-     * @todo return all types of products
      *
      * @return Mage_Catalog_Model_Resource_Product_Collection $collection
      */
     public function getCollection()
     {
         $collection = Mage::getResourceModel('catalog/product_collection')
-            ->addAttributeToFilter('type_id', Mage_Catalog_Model_Product_Type::TYPE_SIMPLE)
+            ->addAttributeToFilter('type_id', array('in' => $this->_selectProductType()))// array('in' => array('simple', 'configurable')))
             ->addAttributeToFilter('status', Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
             ->addAttributeToFilter('visibility', array('neq' => Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE))
             ->addAttributeToSelect('*');
         $collection->load();
         return $collection;
+    }
+
+    private function _selectProductType()
+    {
+        $prod_types = Mage::helper('skroutz/data')->getProductType();
+        foreach ($prod_types as $type) {
+            $result[] = $type;
+        }
+        return $result;
     }
 
     /**
@@ -53,8 +60,7 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
      */
     private function _getAvailability($product)
     {
-        $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($product);
-        if ($stock == 1) {
+        if ($product->isSaleable()) {
             if ($product->getExtra_availability()) {
                 return $product->getAttributeText('extra_availability');
             } else {
@@ -85,7 +91,7 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
                 return $product->getName();
                 break;
             case 'price_with_vat':
-                Mage::app()->loadAreaPart(Mage_Core_Model_App_Area::AREA_FRONTEND, Mage_Core_Model_App_Area::PART_EVENTS); // use frontend events to get the FinalPrice after rules.
+                Mage::app()->loadAreaPart(Mage_Core_Model_App_Area::AREA_FRONTEND, Mage_Core_Model_App_Area::PART_EVENTS);
                 $price = Mage::helper('tax')->getPrice($product, $product->getFinalPrice());
                 return $price;
                 break;
@@ -110,6 +116,25 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
             case 'description':
                 return strip_tags(html_entity_decode($product->getDescription()));
                 break;
+            case 'isbn':
+                return $product->getAttributeText('isbn');
+                break;
+            case 'barcode':
+                return $product->getAttributeText('barcode');
+                break;
         }
+    }
+
+    public function createNodeWithChildData($product)
+    {
+        $childProducts = Mage::getModel('catalog/product_type_configurable')->getUsedProducts(null, $product);
+        unset($result);
+        $result = array();
+        foreach ($childProducts as $child) {
+            if ($child->isSalable()) {
+                $result[] = $child->getAttributeText('manufacturer');
+            }
+        }
+        return implode(',', $result);
     }
 }

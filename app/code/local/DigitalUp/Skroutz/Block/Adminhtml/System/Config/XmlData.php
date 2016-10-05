@@ -6,13 +6,8 @@ class DigitalUp_Skroutz_Block_Adminhtml_System_Config_XmlData extends Mage_Admin
     {
         $this->addColumn('node', array(
             'label' => Mage::helper('adminhtml')->__('XML Node'),
-            'style' => 'width:250px',
+            'style' => 'width:350px',
         ));
-        $this->addColumn('product_attribute', array(
-            'label' => Mage::helper('adminhtml')->__('Product Attribute'),
-            'style' => 'width:250px',
-        ));
-
         $this->_addAfter = false;
         $this->_addButtonLabel = Mage::helper('adminhtml')->__('Add');
     }

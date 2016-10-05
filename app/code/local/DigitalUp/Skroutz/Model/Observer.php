@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @author Dionisis Papanikolaou
+ */
 class DigitalUp_Skroutz_Model_Observer
 {
     public function setSkroutzAnalyticsOnSuccessPageView(Varien_Event_Observer $observer)
@@ -12,7 +15,7 @@ class DigitalUp_Skroutz_Model_Observer
         if ($block) {
             $block->setOrderIds($orderIds);
         }
-        Mage::helper('skroutz')->debugData('observer id: '.$orderIds);
+        Mage::helper('skroutz')->debugData('observer id: ' . $orderIds);
     }
 
 }
