@@ -8,12 +8,16 @@ class DigitalUp_Skroutz_Helper_Data extends Mage_Core_Helper_Abstract
 
     const FEED_ENABLED = 'skroutz/feed/enabled';
     const XML_DATA = 'skroutz/feed/xml_data';
+    const SHOP_NAME = 'skroutz/feed/shop_name';
+    const PRODUCT_TYPE = 'skroutz/feed/product_type';
     const ANALYTICS_ENABLED = 'skroutz/analytics/enabled';
     const ANALYTICS_ID = 'skroutz/analytics/account_id';
     const DEBUG = 'skroutz/developer/debug';
 
 
     protected $_feedEnabled = null;
+    protected $_shopName = null;
+    protected $_productType = null;
     protected $_xmlData = null;
     protected $_analyticsEnabled = null;
     protected $_analyticsId = null;
@@ -33,7 +37,33 @@ class DigitalUp_Skroutz_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * get data from admin table
+     * Returns Name of the shop
+     *
+     * @return  string
+     */
+    public function getShopName()
+    {
+        if (is_null($this->_shopName)) {
+            $this->_shopName = (string)Mage::getStoreConfig(self::SHOP_NAME);
+        }
+        return $this->_shopName;
+    }
+
+    /**
+     * Returns selected product types from admin
+     *
+     * @return  array
+     */
+    public function getProductType()
+    {
+        if (is_null($this->_productType)) {
+            $this->_productType = (string)Mage::getStoreConfig(self::PRODUCT_TYPE);
+        }
+        return explode(',', $this->_productType);
+    }
+
+    /**
+     * get xml nodes from admin table
      * if data exists return unserialized array
      * else return null
      *
@@ -83,12 +113,12 @@ class DigitalUp_Skroutz_Helper_Data extends Mage_Core_Helper_Abstract
      * dump data on screen if enabled && isDevAllowed
      *
      * @param string $data
-     * @return string
+     * @return dump
      */
     public function debugData($data)
     {
         if ((bool)Mage::getStoreConfig(self::DEBUG)) {
-            Mage::log($data, null, 'skroutz.log', true);
+            Mage::log($data, null, 'digitalup_skroutz.log', true);
             if (Mage::helper('core')->isDevAllowed()) {
                 Zend_Debug::dump($data);
             }
