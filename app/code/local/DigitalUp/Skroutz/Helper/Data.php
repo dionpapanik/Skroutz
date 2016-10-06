@@ -7,9 +7,11 @@ class DigitalUp_Skroutz_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
     const FEED_ENABLED = 'skroutz/feed/enabled';
-    const XML_DATA = 'skroutz/feed/xml_data';
     const SHOP_NAME = 'skroutz/feed/shop_name';
     const PRODUCT_TYPE = 'skroutz/feed/product_type';
+    const SUPER_ATTRS = 'skroutz/feed/super_attributes';
+    const SHIPPING_COST = 'skroutz/feed/shipping_cost';
+    const XML_DATA = 'skroutz/feed/xml_data';
     const ANALYTICS_ENABLED = 'skroutz/analytics/enabled';
     const ANALYTICS_ID = 'skroutz/analytics/account_id';
     const DEBUG = 'skroutz/developer/debug';
@@ -18,6 +20,8 @@ class DigitalUp_Skroutz_Helper_Data extends Mage_Core_Helper_Abstract
     protected $_feedEnabled = null;
     protected $_shopName = null;
     protected $_productType = null;
+    protected $_supperAttrs = null;
+    protected $_shippingCost = null;
     protected $_xmlData = null;
     protected $_analyticsEnabled = null;
     protected $_analyticsId = null;
@@ -63,6 +67,33 @@ class DigitalUp_Skroutz_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Returns attributes responsible for config products
+     *
+     * @return  array || null
+     */
+    public function getSupperAttributes()
+    {
+        $this->_supperAttrs = (string)Mage::getStoreConfig(self::SUPER_ATTRS);
+        if ($this->_supperAttrs) {
+            return explode(',', $this->_supperAttrs);            
+        }
+        return null;
+    }
+
+    /**
+     * Return fixed Shipping Cost
+     *
+     * @return  string
+     */
+    public function getShippingCost()
+    {
+        if (is_null($this->shippingCost)) {
+            $this->shippingCost = (string)Mage::getStoreConfig(self::SHIPPING_COST);
+        }
+        return $this->shippingCost;
+    }
+
+    /**
      * get xml nodes from admin table
      * if data exists return unserialized array
      * else return null
@@ -74,7 +105,6 @@ class DigitalUp_Skroutz_Helper_Data extends Mage_Core_Helper_Abstract
         $this->_xmlData = Mage::getStoreConfig(self::XML_DATA);
         if ($this->_xmlData) {
             $this->_xmlData = unserialize($this->_xmlData);
-            // $this->debugData($this->_xmlData);
             return $this->_xmlData;
         }
         return null;
@@ -109,7 +139,7 @@ class DigitalUp_Skroutz_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * function to debug data
-     * log data in skroutz.log if enabled
+     * log data in digitalup_skroutz.log if enabled
      * dump data on screen if enabled && isDevAllowed
      *
      * @param string $data

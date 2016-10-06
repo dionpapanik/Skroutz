@@ -52,4 +52,18 @@
             </skroutzcontroller>
         </routers>
     </frontend>
+    <default>
+        <skroutz>
+            <feed>
+                <enabled><![CDATA[0]]></enabled>
+                <shop_name><![CDATA[Shop Name]]></shop_name>
+            </feed>
+            <analytics>
+                <enabled><![CDATA[0]]></enabled>
+            </analytics>
+            <developer>
+                <debug><![CDATA[0]]></debug>
+            </developer>
+        </skroutz>
+    </default>
 </config>

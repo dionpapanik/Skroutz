@@ -21,13 +21,18 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
         return $collection;
     }
 
+    /**
+     * return product types (simple, config etc...) to filter in collection
+     *
+     * @return array
+     */
     private function _selectProductType()
     {
-        $prod_types = Mage::helper('skroutz/data')->getProductType();
-        foreach ($prod_types as $type) {
-            $result[] = $type;
+        $types = Mage::helper('skroutz/data')->getProductType();
+        foreach ($types as $type) {
+            $prod_types[] = $type;
         }
-        return $result;
+        return $prod_types;
     }
 
     /**
@@ -73,7 +78,6 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
 
     /**
      * return the value of the XML node
-     * checks also extra_availability attribute
      *
      * @params Mage_Catalog_Model_Product $product , string $node
      * @return string || float
@@ -125,16 +129,26 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
         }
     }
 
-    public function createNodeWithChildData($product)
+    /**
+     * return super attribute's values responsible for config product
+     * used only for configs
+     *
+     * use of array_unique because returns multiple times the same value
+     * if assigned to more than one simples
+     *
+     * @params Mage_Catalog_Model_Product $product , string $attribute
+     * @return string || float
+     */
+    public function createNodeWithChildData($product, $attribute)
     {
         $childProducts = Mage::getModel('catalog/product_type_configurable')->getUsedProducts(null, $product);
-        unset($result);
-        $result = array();
+        unset($attribute_text);
+        $attribute_text = array();
         foreach ($childProducts as $child) {
             if ($child->isSalable()) {
-                $result[] = $child->getAttributeText('manufacturer');
+                $attribute_text[] = $child->getAttributeText($attribute);
             }
         }
-        return implode(',', $result);
+        return implode(', ', array_unique($attribute_text));
     }
 }
