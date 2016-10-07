@@ -137,7 +137,7 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
      * if assigned to more than one simples
      *
      * @params Mage_Catalog_Model_Product $product , string $attribute
-     * @return string || float
+     * @return string
      */
     public function createNodeWithChildData($product, $attribute)
     {
