@@ -1,4 +1,4 @@
 # Skroutz
-skroutz analytics. @todo skroutz feed
+skroutz analytics & feed
 
-Send Analytics data to skroutz platform. Works only for analytics. Needs to implemented for feed!
+Send Analytics data and XML Feed to skroutz platform
