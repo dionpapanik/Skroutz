@@ -19,7 +19,6 @@
         <models>
             <skroutz>
                 <class>DigitalUp_Skroutz_Model</class>
-                <resourceModel>apifon_mysql4</resourceModel>
             </skroutz>
         </models>
     </global>
