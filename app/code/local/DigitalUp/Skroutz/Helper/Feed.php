@@ -13,7 +13,7 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
     public function getCollection()
     {
         $collection = Mage::getResourceModel('catalog/product_collection')
-            ->addAttributeToFilter('type_id', array('in' => $this->_selectProductType()))// array('in' => array('simple', 'configurable')))
+            ->addAttributeToFilter('type_id', array('in' => $this->_selectProductType()))
             ->addAttributeToFilter('status', Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
             ->addAttributeToFilter('visibility', array('neq' => Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE))
             ->addAttributeToSelect('*');
