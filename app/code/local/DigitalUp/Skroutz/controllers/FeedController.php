@@ -5,12 +5,13 @@
  */
 class DigitalUp_Skroutz_FeedController extends Mage_Core_Controller_Front_Action
 {
-    // if skroutz is disabled from admin return magento's 404
+    // if skroutz is disabled from admin return magento's 404 with notice
     public function preDispatch()
     {
         parent::preDispatch();
 
         if (!Mage::helper('skroutz/data')->feedEnabled()) {
+        	Mage::getSingleton('core/session')->addError('Skroutz disabled from admin panel');
             $this->norouteAction();
         }
     }
