@@ -103,7 +103,8 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
                 return strpos($product->getProductUrl(), '?') > 0 ? substr($product->getProductUrl(), 0, strpos($product->getProductUrl(), '?')) : $product->getProductUrl();
                 break;
             case 'image':
-                return Mage::getModel('catalog/product_media_config')->getMediaUrl($product->getImage());
+                $image = $product->getImage()?: $product->getSmallImage() ?: $product->getThumbnail();
+                return Mage::getModel('catalog/product_media_config')->getMediaUrl($image);
                 break;
             case 'category':
                 return $this->_getTheCrumb($product);
