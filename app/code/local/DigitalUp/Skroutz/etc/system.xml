@@ -79,7 +79,7 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                             <comment>Acceptable Fields: id, sku, name, price_with_vat, image, category, manufacturer, stock,
-                                description, availability, url, isbn, barcode
+                                description, weight, availability, url, isbn, barcode
                             </comment>
                         </xml_data>
                     </fields>

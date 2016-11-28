@@ -121,6 +121,9 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
             case 'description':
                 return strip_tags(html_entity_decode($product->getDescription()));
                 break;
+			case 'weight':
+                return round($product->getData('weight'), 2) . ' kg';
+                break;
             case 'isbn':
                 return $product->getAttributeText('isbn');
                 break;
