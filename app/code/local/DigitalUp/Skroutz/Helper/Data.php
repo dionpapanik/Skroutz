@@ -87,10 +87,10 @@ class DigitalUp_Skroutz_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getShippingCost()
     {
-        if (is_null($this->shippingCost)) {
-            $this->shippingCost = (string)Mage::getStoreConfig(self::SHIPPING_COST);
+        if (is_null($this->_shippingCost)) {
+            $this->_shippingCost = (string)Mage::getStoreConfig(self::SHIPPING_COST);
         }
-        return $this->shippingCost;
+        return $this->_shippingCost;
     }
 
     /**
