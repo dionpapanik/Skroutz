@@ -11,7 +11,7 @@ class DigitalUp_Skroutz_FeedController extends Mage_Core_Controller_Front_Action
         parent::preDispatch();
 
         if (!Mage::helper('skroutz/data')->feedEnabled()) {
-        	Mage::getSingleton('core/session')->addError('Skroutz disabled from admin panel');
+        	Mage::getSingleton('core/session')->addError('Oooops! Skroutz XML is disabled from admin panel');
             $this->norouteAction();
         }
     }
@@ -39,11 +39,9 @@ class DigitalUp_Skroutz_FeedController extends Mage_Core_Controller_Front_Action
                     $node = $data['node'];
                     $xml_product->addChild($node, $feedHelper->createNodeValue($node, $product));
                 }
-                if ($product->isConfigurable()) {
-                    if ($dataHelper->getSupperAttributes()) {
-                        foreach ($dataHelper->getSupperAttributes() as $attribute) {
-                            $xml_product->addChild($attribute, $feedHelper->createNodeWithChildData($product, $attribute));
-                        }
+                if ($product->isConfigurable() && $dataHelper->getSupperAttributes()) {
+                    foreach ($dataHelper->getSupperAttributes() as $attribute) {
+                        $xml_product->addChild($attribute, $feedHelper->createNodeWithChildData($product, $attribute));
                     }
                 }
 
