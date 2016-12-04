@@ -41,7 +41,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <validate>validate-clean-url</validate>
+                             <validate>validate-alphanum</validate>
                         </shop_name>
                         <product_type translate="label">
                             <label>Select Product Type</label>
