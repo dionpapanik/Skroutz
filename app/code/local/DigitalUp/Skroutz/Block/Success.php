@@ -15,8 +15,14 @@ class DigitalUp_Skroutz_Block_Success extends Mage_Core_Block_Template
             ->addFieldToFilter('entity_id', array('in' => $orderIds));
 
 
+        $core_helper = Mage::helper('core'); // init core helper
         // fetch data
         foreach ($collection as $order) {
+            $surcharge = 0; //init surcharge
+            if ($core_helper->isModuleEnabled('Magebright_Surcharge') && $core_helper->isModuleOutputEnabled('Magebright_Surcharge')) {
+                $surcharge = round($order->getFeeAmount(), 2); // remove magebright surcharge from grand total if module exists
+            }
+
             $result[] = sprintf("sa('ecommerce', 'addOrder', JSON.stringify({
 order_id: '%s',
 revenue: '%s',
@@ -24,9 +30,9 @@ shipping: '%s',
 tax: '%s'
 }));",
                 $order->getIncrementId(),
-                round($order->getBaseGrandTotal(), 2),
+                round($order->getBaseGrandTotal(), 2) - $surcharge, //get grand total without surcharge if exists
                 round($order->getShippingAmount(), 2), // get shipping with tax
-                round($order->getBaseTaxAmount(), 2)
+                round($order->getBaseTaxAmount(), 2) // get clean tax
             );
 
             foreach ($order->getAllVisibleItems() as $item) {
