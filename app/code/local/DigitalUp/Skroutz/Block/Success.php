@@ -44,7 +44,7 @@ price: '%s',
 quantity: '%s'
 }));",
                     $order->getIncrementId(),
-                    $this->jsQuoteEscape($item->getProduct()->getSku()), // load the product. Works for config product SKUs.
+                    $this->jsQuoteEscape($item->getProduct()->getId()), // load the product. Works for config product IDs.
                     $this->jsQuoteEscape($item->getName()),
                     round($item->getProduct()->getFinalPrice(), 2), // load the product. Works for Final Price incl tax.
                     floatval($item->getQtyOrdered())
