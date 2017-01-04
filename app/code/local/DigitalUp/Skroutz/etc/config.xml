@@ -2,7 +2,7 @@
 <config>
     <modules>
         <DigitalUp_Skroutz>
-            <version>0.1.0</version>
+            <version>0.1.1</version>
         </DigitalUp_Skroutz>
     </modules>
     <global>
@@ -55,7 +55,7 @@
         <skroutz>
             <feed>
                 <enabled><![CDATA[0]]></enabled>
-                <shop_name><![CDATA[Shop Name]]></shop_name>
+                <shop_name><![CDATA[ShopName]]></shop_name>
             </feed>
             <analytics>
                 <enabled><![CDATA[0]]></enabled>
