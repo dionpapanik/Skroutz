@@ -25,6 +25,7 @@ class DigitalUp_Skroutz_Helper_Data extends Mage_Core_Helper_Abstract
     protected $_xmlData = null;
     protected $_analyticsEnabled = null;
     protected $_analyticsId = null;
+    public $moduleData = array();
 
 
     /**
@@ -153,5 +154,20 @@ class DigitalUp_Skroutz_Helper_Data extends Mage_Core_Helper_Abstract
                 Zend_Debug::dump($data);
             }
         }
+    }
+
+    /**
+     * Return info of the module based on the config.xml
+     *
+     * @return  array
+     */
+    public function getModuleData()
+    {
+        if (empty($this->moduleData)) {
+            $this->moduleData['version'] = (string)Mage::getConfig()->getNode('modules/DigitalUp_Skroutz/version');
+            $this->moduleData['codepool'] = (string)Mage::getConfig()->getNode('modules/DigitalUp_Skroutz/codePool');
+        }
+
+        return $this->moduleData;
     }
 }

@@ -16,6 +16,13 @@
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
             <groups>
+                <notice translate="label">
+                    <frontend_model>skroutz/config_info</frontend_model>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </notice>
                 <feed translate="label">
                     <label>Skroutz XML Feed</label>
                     <frontend_type>text</frontend_type>
@@ -41,7 +48,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                             <validate>validate-alphanum</validate>
+                            <validate>validate-alphanum</validate>
                         </shop_name>
                         <product_type translate="label">
                             <label>Select Product Type</label>
@@ -78,7 +85,8 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <comment>Acceptable Fields: id, sku, name, price_with_vat, image, category, manufacturer, stock,
+                            <comment>Acceptable Fields: id, sku, name, price_with_vat, image, category, manufacturer,
+                                stock,
                                 description, weight, availability, url, isbn, barcode
                             </comment>
                         </xml_data>

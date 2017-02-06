@@ -92,7 +92,7 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
                 return $product->getSku();
                 break;
             case 'name':
-                return $this->_addCData($product->getName());
+                return $product->getName();
                 break;
             case 'price_with_vat':
                 Mage::app()->loadAreaPart(Mage_Core_Model_App_Area::AREA_FRONTEND, Mage_Core_Model_App_Area::PART_EVENTS);
@@ -100,17 +100,17 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
                 return $price;
                 break;
             case 'url':
-                return $this->_addCData(strpos($product->getProductUrl(), '?') > 0 ? substr($product->getProductUrl(), 0, strpos($product->getProductUrl(), '?')) : $product->getProductUrl());
+                return strpos($product->getProductUrl(), '?') > 0 ? substr($product->getProductUrl(), 0, strpos($product->getProductUrl(), '?')) : $product->getProductUrl();
                 break;
             case 'image':
-                $image = $product->getImage()?: $product->getSmallImage() ?: $product->getThumbnail();
-                return $this->_addCData(Mage::getModel('catalog/product_media_config')->getMediaUrl($image));
+                $image = $product->getImage() ?: $product->getSmallImage() ?: $product->getThumbnail();
+                return Mage::getModel('catalog/product_media_config')->getMediaUrl($image);
                 break;
             case 'category':
-                return $this->_addCData($this->_getTheCrumb($product));
+                return $this->_getTheCrumb($product);
                 break;
             case 'manufacturer':
-                return $this->_addCData($product->getAttributeText('manufacturer'));
+                return $product->getAttributeText('manufacturer');
                 break;
             case 'availability':
                 return $this->_getAvailability($product);
@@ -119,9 +119,9 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
                 return $product->isSaleable() ? 'Y' : 'N';
                 break;
             case 'description':
-                return $this->_addCData(strip_tags(html_entity_decode($product->getDescription())));
+                return strip_tags(html_entity_decode($product->getDescription()));
                 break;
-			case 'weight':
+            case 'weight':
                 return round($product->getData('weight'), 2) . ' kg';
                 break;
             case 'isbn':
@@ -131,18 +131,6 @@ class DigitalUp_Skroutz_Helper_Feed extends Mage_Core_Helper_Abstract
                 return $product->getAttributeText('barcode');
                 break;
         }
-    }
-
-     /**
-     * add CDATA to node
-     *
-     * @params string $input
-     * @return string
-     */
-
-    private function _addCData($input)
-    {
-        return '<![CDATA[' . $input . ']]>';
     }
 
     /**
